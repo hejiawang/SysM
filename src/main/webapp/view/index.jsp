@@ -5,9 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <title>layout 后台大布局 - Layui</title>
     <link rel="stylesheet" href="../../static/lib/layui/css/layui.css">
-    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../static/lib/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style type="text/css">
-        .layui-tab-item {display: none; height: 100%}
+        .layui-tab-item {
+            display: none;
+            height: 100%
+        }
+        .hvr-icon-pulse {
+            display: inline-block;
+            vertical-align: middle;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -moz-osx-font-smoothing: grayscale;
+            position: relative;
+        }
+        .layui-side .layui-nav-tree .layui-nav-item a i{
+            display: block;
+            text-align: center;
+            width: 50px;
+            line-height: 45px;
+            float: left;
+        }
     </style>
 </head>
 <body class="layui-layout-body">
