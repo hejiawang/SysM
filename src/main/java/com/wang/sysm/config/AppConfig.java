@@ -7,6 +7,7 @@ import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 import com.wang.sysm.controller.IndexController;
+import com.wang.sysm.controller.MainController;
 import com.wang.sysm.controller.TestController;
 import com.wang.sysm.interceptor.TestInterceptor;
 import com.wang.sysm.model._MappingKit;
@@ -37,11 +38,9 @@ public class AppConfig extends JFinalConfig {
     public void configRoute(Routes routes) {
         routes.setBaseViewPath("/view");
 
-        //routes.add(new IndexRoute());
-        //routes.add(new TestRoute());
-
         routes.add("/", IndexController.class);
         routes.add("/test", TestController.class, "/test");
+        routes.add("/main", MainController.class, "/main");
     }
 
     /**
