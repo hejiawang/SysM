@@ -8,6 +8,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.template.Engine;
 import com.wang.sysm.controller.IndexController;
 import com.wang.sysm.controller.MainController;
+import com.wang.sysm.controller.SysMCodeLogController;
 import com.wang.sysm.controller.TestController;
 import com.wang.sysm.interceptor.TestInterceptor;
 import com.wang.sysm.model._MappingKit;
@@ -41,6 +42,7 @@ public class AppConfig extends JFinalConfig {
         routes.add("/", IndexController.class);
         routes.add("/test", TestController.class, "/test");
         routes.add("/main", MainController.class, "/main");
+        routes.add("/codeLog", SysMCodeLogController.class, "/codeLog");
     }
 
     /**

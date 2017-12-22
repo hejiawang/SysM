@@ -22,3 +22,13 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE `sysm_code_log` (
+  `id` varchar(36) NOT NULL COMMENT 'ID主键',
+  `date` datetime NOT NULL COMMENT '日期',
+  `content` varchar(1024) NOT NULL COMMENT '日志内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+ALTER TABLE `sysm_code_log` COMMENT='系统开发进度日志';
+
+
+

@@ -42,10 +42,11 @@
             <div class="layui-side-scroll">
                 <ul class="layui-nav layui-nav-tree e_menu_ul"  lay-filter="lay_menu">
                     <li class="layui-nav-item">
-                        <a class="" href="javascript:;"><i class="fa fa-coffee fa-fw hvr-icon-pulse"> </i><span> 父级菜单</span></a>
+                        <a class="" href="javascript:;"><i class="fa fa-coffee fa-fw hvr-icon-pulse"> </i><span> 系统管理</span></a>
                         <dl class="layui-nav-child">
                             <dd><a class="e_menu" data-menu-url="test/pageIndex" data-menu-title="名称一" data-menu-type="tabAdd" href="javascript:;">列表一</a></dd>
                             <dd><a class="e_menu" data-menu-url="test/pageIndex2" data-menu-title="名称二" data-menu-type="tabAdd" href="javascript:;">列表二</a></dd>
+                            <dd><a class="e_menu" data-menu-url="codeLog/index" data-menu-title="系统日志" data-menu-type="tabAdd" href="javascript:;">系统日志</a></dd>
                         </dl>
                     </li>
                 </ul>
