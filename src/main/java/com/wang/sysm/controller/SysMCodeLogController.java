@@ -26,4 +26,8 @@ public class SysMCodeLogController extends Controller {
 
         renderJson(new LayUIPageResult<CodeLog>(service.findAllByPaginate(pageNumber, pageSize, content)));
     }
+
+    public void raisePage(){
+        render("codeLogRaise.jsp");
+    }
 }
