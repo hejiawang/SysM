@@ -1,9 +1,11 @@
 package com.wang.sysm.controller;
 
 import com.jfinal.core.Controller;
+import com.sun.tools.javac.jvm.Code;
 import com.wang.sysm.model.CodeLog;
 import com.wang.sysm.service.ISysMCodeLogService;
 import com.wang.sysm.service.impl.SysMCodeLogServiceImpl;
+import com.wang.sysm.utils.http.HttpControllerResult;
 import com.wang.sysm.utils.http.LayUIPageResult;
 
 /**
@@ -20,14 +22,15 @@ public class SysMCodeLogController extends Controller {
     }
 
     public void list(){
-        int pageNumber = getParaToInt("page");
-        int pageSize = getParaToInt("limit");
+        int pageNumber = getParaToInt("page", 1);
+        int pageSize = getParaToInt("limit", 10);
         String content = getPara("content", "");
 
         renderJson(new LayUIPageResult<CodeLog>(service.findAllByPaginate(pageNumber, pageSize, content)));
     }
 
-    public void raisePage(){
-        render("codeLogRaise.jsp");
+    public void raise(){
+        CodeLog codeLog = getBean(CodeLog.class);
+        renderJson(new HttpControllerResult<Boolean>(service.save(codeLog)));
     }
 }

@@ -57,6 +57,16 @@
     width: 0px;
     height: 0px;
 }
+/*弹出层*/
+.sysm-body-popup{
+    position: absolute;
+    top: 20px;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    overflow: auto;
+    display:none;
+}
 /*codeLog*/
 .layui-table, .layui-table-view{
     margin : 0px;

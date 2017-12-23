@@ -29,8 +29,30 @@
         </script>
     </div>
 
+    <div id="codeLogRaise" class="sysm-body-popup">
+        <form class="layui-form layui-form-pane" id="codeLog_raise_form">
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label">日志时间 : </label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input" id="codeLog_date" name="codeLog.date" placeholder="yyyy-MM-dd">
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">日志内容</label>
+                <div class="layui-input-block">
+                    <textarea placeholder="请输入内容" class="layui-textarea" id="codeLog_content" name="codeLog.content"></textarea>
+                </div>
+            </div>
+        </form>
+    </div>
+
     <script src="../../static/lib/layui/layui.js"></script>
     <script src="../../static/lib/jquery/3.2.1/jquery.js"></script>
+    <script src="../../static/lib/rabbit/rabbit.ajax.js"></script>
+    <script src="../../static/lib/rabbit/rabbit.common.js"></script>
+    <script src="../../static/lib/rabbit/rabbit.layMsg.js"></script>
     <script src="../../static/script/codeLog/codeLog.js"></script>
 
 </body>

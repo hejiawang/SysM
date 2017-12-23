@@ -1,13 +1,17 @@
-layui.use([ 'layer', 'table'], function(){
+layui.use([ 'layer', 'table', 'laydate', 'layedit'], function(){
     new CodeLog(layui).init();
 });
 
 var CodeLog = function(layui){
     this.table = layui.table;
     this.layer = layui.layer;
+    this.laydate = layui.laydate;
+    this.layedit = layui.layedit;
+
+    this.layeditIndex = null;
 
     this.listUrl = "/codeLog/list";
-    this.raisePageUrl = "/codeLog/raisePage";
+    this.raiseUrl = "/codeLog/raise";
 };
 
 $.extend(CodeLog.prototype, {
@@ -46,6 +50,14 @@ $.extend(CodeLog.prototype, {
             type && _t[type] && _t[type]();
         });
     },
+    'initBuild' : function () {
+        this.laydate.render({ elem: '#codeLog_date', value: new Date() });
+        this.layeditIndex = this.layedit.build('codeLog_content', {
+            tool: [
+                'strong' ,'italic'  ,'underline' ,'del' ,'|'  ,'left' ,'center' ,'right' ,'link' ,'unlink' ,'face'
+            ]
+        });
+    },
     'codeLogSearch' : function () {
         this.table.reload('codeLogListTable',{
             page:{ curr: 1 },
@@ -57,11 +69,11 @@ $.extend(CodeLog.prototype, {
         this.codeLogSearch();
     },
     'codeLogDetail' : function (obj) {
-        this.layer.msg('查看操作');
-        var data = obj.data; //获得当前行数据
+        layMsg.modifySuccessMsg();
+        //var data = obj.data; //获得当前行数据
     },
     'codeLogEdit' : function (obj) {
-        this.layer.msg('修改操作');
+        layMsg.deleteSuccessMsg();
     },
     'codeLogRaise': function () {
         var _t = this,
@@ -69,21 +81,32 @@ $.extend(CodeLog.prototype, {
             tableW = $(".sysm-body").css("width"), tableW = tableW.substring(0, tableW.length - 2) - 200;
 
         _t.layer.open({
-            type: 2,
-            title : '新增记录',
+            type: 1,
+            title : '新增日志',
             maxmin: true,
             area: [ tableW + 'px', tableH + 'px'],
-            content: _t.raisePageUrl,
-            btn: ['确定', '取消'],
-            yes: function(index, layero){
-                console.info(layero);
-            },
-            btn2: function(index, layero){  _t.layer.close(index); }
+            content: $("#codeLogRaise"),
+            btn: [common.buttonYes, common.buttonNo],
+            yes: function(index, layero){  _t.codeLogRaiseCall(index, layero); },
+            btn2: function(index, layero){ _t.layer.close(index); }
+        });
+
+        _t.initBuild();
+    },
+    'codeLogRaiseCall': function (index, layero) {
+        var _t = this,
+            param = {
+            'codeLog.date': $("#codeLog_date").val(),
+            'codeLog.content' : _t.layedit.getContent(_t.layeditIndex)
+        };
+        ajax.get(_t.raiseUrl, param, function (res) {
+            _t.layer.close(index);
+            layMsg.raiseSuccessMsg();
+            _t.codeLogReload();
         });
     },
     'codeLogDelete' : function (obj) {
-        this.layer.confirm('真的删除行么？', function(index){
-            //obj.del(); //删除对应行（tr）的DOM结构
+        this.layer.confirm( common.deleteConfirmTest , function(index){
             layer.close(index);
         });
     }

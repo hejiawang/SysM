@@ -17,4 +17,11 @@ public interface ISysMCodeLogService {
      * @return codelog list
      */
     Page<CodeLog> findAllByPaginate(int pageNumber, int pageSize, String content);
+
+    /**
+     * 保存CodeLog
+     * @param codeLog codeLog
+     * @return true
+     */
+    Boolean save(CodeLog codeLog);
 }

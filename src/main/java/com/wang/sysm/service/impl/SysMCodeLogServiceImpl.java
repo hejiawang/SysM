@@ -4,6 +4,7 @@ import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.wang.sysm.model.CodeLog;
 import com.wang.sysm.service.ISysMCodeLogService;
+import com.wang.sysm.utils.UUIDUtil;
 
 /**
  * @auther HeJiawang
@@ -22,5 +23,11 @@ public class SysMCodeLogServiceImpl implements ISysMCodeLogService {
         sqlFrom += "ORDER BY date DESC";
 
         return dao.paginate(pageNumber, pageSize, "select *", sqlFrom);
+    }
+
+    @Override
+    public Boolean save(CodeLog codeLog) {
+        codeLog.setId(UUIDUtil.build());
+        return codeLog.save();
     }
 }
