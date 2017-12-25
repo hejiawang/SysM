@@ -11,10 +11,10 @@ var CodeLog = function(layui){
     }
 
     {
-        this.listUrl = "/codeLog/list";
-        this.raiseUrl = "/codeLog/raise";
-        this.deleteUrl = "/codeLog/delete";
-        this.modifyUrl = "/codeLog/modify";
+        this.listUrl = webUrl + "/codeLog/list";
+        this.raiseUrl = webUrl +  "/codeLog/raise";
+        this.deleteUrl = webUrl + "/codeLog/delete";
+        this.modifyUrl = webUrl + "/codeLog/modify";
     }
 
     {

@@ -6,6 +6,8 @@ import com.wang.sysm.model.CodeLog;
 import com.wang.sysm.service.ISysMCodeLogService;
 import com.wang.sysm.utils.UUIDUtil;
 
+import java.util.List;
+
 /**
  * @auther HeJiawang
  * @date 2017/12/22
@@ -21,7 +23,7 @@ public class SysMCodeLogServiceImpl implements ISysMCodeLogService {
 
     @Override
     public Boolean save(CodeLog codeLog) {
-        codeLog.setId(UUIDUtil.build());
+        codeLog.setId(UUIDUtil.render());
         return codeLog.save();
     }
 
@@ -33,5 +35,10 @@ public class SysMCodeLogServiceImpl implements ISysMCodeLogService {
     @Override
     public Boolean modify(CodeLog codeLog) {
         return codeLog.update();
+    }
+
+    @Override
+    public List<CodeLog> listAll() {
+        return dao.findAll();
     }
 }

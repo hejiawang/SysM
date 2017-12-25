@@ -3,6 +3,8 @@ package com.wang.sysm.service;
 import com.jfinal.plugin.activerecord.Page;
 import com.wang.sysm.model.CodeLog;
 
+import java.util.List;
+
 /**
  * @auther HeJiawang
  * @date 2017/12/22
@@ -38,4 +40,10 @@ public interface ISysMCodeLogService {
      * @return true
      */
     Boolean modify(CodeLog codeLog);
+
+    /**
+     * 获取所有日志记录
+     * @return CodeLog
+     */
+    List<CodeLog> listAll();
 }

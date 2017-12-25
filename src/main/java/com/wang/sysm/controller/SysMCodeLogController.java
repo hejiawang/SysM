@@ -8,6 +8,8 @@ import com.wang.sysm.service.impl.SysMCodeLogServiceImpl;
 import com.wang.sysm.utils.http.HttpControllerResult;
 import com.wang.sysm.utils.http.LayUIPageResult;
 
+import java.util.List;
+
 /**
  * 系统开发日志
  * @auther HeJiawang
@@ -19,6 +21,10 @@ public class SysMCodeLogController extends Controller {
 
     public void index(){
         renderFreeMarker("codeLog.html");
+    }
+
+    public void listAll(){
+        renderJson(new HttpControllerResult<List<CodeLog>>(service.listAll()));
     }
 
     public void list(){
