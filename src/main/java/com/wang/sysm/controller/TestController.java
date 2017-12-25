@@ -27,11 +27,11 @@ public class TestController extends Controller {
     }
 
     public void pageIndex(){
-        render("index.jsp");
+        renderFreeMarker("index.html");
     }
 
     public void pageIndex2(){
-        render("index2.jsp");
+        renderFreeMarker("index2.html");
     }
 
     @ActionKey("actionTest")

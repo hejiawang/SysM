@@ -5,6 +5,8 @@ import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.render.FreeMarkerRender;
+import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.wang.sysm.controller.IndexController;
 import com.wang.sysm.controller.MainController;
@@ -12,6 +14,8 @@ import com.wang.sysm.controller.SysMCodeLogController;
 import com.wang.sysm.controller.TestController;
 import com.wang.sysm.interceptor.TestInterceptor;
 import com.wang.sysm.model._MappingKit;
+import freemarker.template.Configuration;
+import freemarker.template.TemplateModelException;
 
 /**
  * @auther HeJiawang
@@ -28,7 +32,8 @@ public class AppConfig extends JFinalConfig {
         PropKit.use("common_config.properties");
 
         constants.setDevMode(PropKit.getBoolean("devMode", false));
-        //constants.setViewType(ViewType.FREE_MARKER);
+        constants.setViewType(ViewType.FREE_MARKER);
+        this.setFMSharedVariable();
     }
 
     /**
@@ -86,5 +91,18 @@ public class AppConfig extends JFinalConfig {
     @Override
     public void configHandler(Handlers handlers) {
 
+    }
+
+    private void setFMSharedVariable() {
+        try {
+            Configuration configuration = FreeMarkerRender.getConfiguration();
+            configuration.setSharedVariable("webUrl", PropKit.get("webUrl"));
+            configuration.setSharedVariable("libUrl", PropKit.get("webUrl") + PropKit.get("libUrl"));
+            configuration.setSharedVariable("jsUrl", PropKit.get("webUrl") + PropKit.get("jsUrl"));
+            configuration.setSharedVariable("cssUrl", PropKit.get("webUrl") + PropKit.get("cssUrl"));
+            configuration.setSharedVariable("imgUrl", PropKit.get("webUrl") + PropKit.get("imgUrl"));
+        } catch (TemplateModelException e) {
+            e.printStackTrace();
+        }
     }
 }

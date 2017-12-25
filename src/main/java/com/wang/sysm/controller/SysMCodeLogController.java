@@ -18,7 +18,7 @@ public class SysMCodeLogController extends Controller {
     public static final ISysMCodeLogService service = new SysMCodeLogServiceImpl();
 
     public void index(){
-        render("codeLog.jsp");
+        renderFreeMarker("codeLog.html");
     }
 
     public void list(){

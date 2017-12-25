@@ -6,7 +6,7 @@ layui.use('element', function(){
             _t.attr("data-menu-type", "tabChange");
 
             var html = '' +
-                '<iframe name="iframe" frameborder="0" class="layui-content-ifram" src="http://localhost:8080/' + _t.data("menu-url") + '">'+
+                '<iframe name="iframe" frameborder="0" class="layui-content-ifram" src="' + webUrl + "/" + _t.data("menu-url") + '">'+
                 '</iframe>';
 
             element.tabAdd('lay_menu_tab', {
