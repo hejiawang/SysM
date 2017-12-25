@@ -24,4 +24,18 @@ public interface ISysMCodeLogService {
      * @return true
      */
     Boolean save(CodeLog codeLog);
+
+    /**
+     * 删除
+     * @param codeLog codeLog
+     * @return true
+     */
+    Boolean delete(CodeLog codeLog);
+
+    /**
+     * 修改
+     * @param codeLog codeLog
+     * @return true
+     */
+    Boolean modify(CodeLog codeLog);
 }

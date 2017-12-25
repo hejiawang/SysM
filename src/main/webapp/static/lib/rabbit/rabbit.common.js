@@ -18,6 +18,17 @@ var Common = function () {
     this.buttonNo = "取消";
 }
 
-$.extend(Common.prototype, {  });
+$.extend(Common.prototype, {
+    "isBlank" : function (text) {
+        if( text == null || text == "" || text.length <= 0 ){
+            return true;
+        } else {
+            return false;
+        }
+    },
+    'isNotBlank' : function (text) {
+        return !this.isBlank(text);
+    }
+});
 
 var common = new Common();

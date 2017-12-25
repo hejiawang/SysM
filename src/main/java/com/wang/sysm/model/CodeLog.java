@@ -1,5 +1,7 @@
 package com.wang.sysm.model;
 
+import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Page;
 import com.wang.sysm.model.base.BaseCodeLog;
 
 /**
@@ -8,4 +10,14 @@ import com.wang.sysm.model.base.BaseCodeLog;
 @SuppressWarnings("serial")
 public class CodeLog extends BaseCodeLog<CodeLog> {
 	public static final CodeLog dao = new CodeLog().dao();
+
+	public static Page<CodeLog> paginate( int pageNumber, int pageSize, String content ){
+		String sqlFrom = "from sysm_code_log ";
+		if(StrKit.notBlank(content)){
+			sqlFrom += "where content like '%" + content + "%' ";
+		}
+		sqlFrom += "ORDER BY date DESC";
+
+		return dao.paginate(pageNumber, pageSize, "select *", sqlFrom);
+	}
 }

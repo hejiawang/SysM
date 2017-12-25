@@ -16,18 +16,22 @@ public class SysMCodeLogServiceImpl implements ISysMCodeLogService {
 
     @Override
     public Page<CodeLog> findAllByPaginate(int pageNumber, int pageSize, String content) {
-        String sqlFrom = "from sysm_code_log ";
-        if(StrKit.notBlank(content)){
-            sqlFrom += "where content like '%" + content + "%' ";
-        }
-        sqlFrom += "ORDER BY date DESC";
-
-        return dao.paginate(pageNumber, pageSize, "select *", sqlFrom);
+        return dao.paginate(pageNumber, pageSize, content);
     }
 
     @Override
     public Boolean save(CodeLog codeLog) {
         codeLog.setId(UUIDUtil.build());
         return codeLog.save();
+    }
+
+    @Override
+    public Boolean delete(CodeLog codeLog) {
+        return codeLog.delete();
+    }
+
+    @Override
+    public Boolean modify(CodeLog codeLog) {
+        return codeLog.update();
     }
 }

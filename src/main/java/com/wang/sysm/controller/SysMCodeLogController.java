@@ -33,4 +33,14 @@ public class SysMCodeLogController extends Controller {
         CodeLog codeLog = getBean(CodeLog.class);
         renderJson(new HttpControllerResult<Boolean>(service.save(codeLog)));
     }
+
+    public void delete(){
+        CodeLog codeLog = getBean(CodeLog.class);
+        renderJson(new HttpControllerResult<Boolean>(service.delete(codeLog)));
+    }
+
+    public void modify(){
+        CodeLog codeLog = getBean(CodeLog.class);
+        renderJson(new HttpControllerResult<Boolean>(service.modify(codeLog)));
+    }
 }

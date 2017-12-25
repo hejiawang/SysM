@@ -29,8 +29,8 @@
         </script>
     </div>
 
-    <div id="codeLogRaise" class="sysm-body-popup">
-        <form class="layui-form layui-form-pane" id="codeLog_raise_form">
+    <div id="codeLogBody" class="sysm-body-popup">
+        <form class="layui-form layui-form-pane" id="codeLog_form">
             <div class="layui-form-item">
                 <div class="layui-inline">
                     <label class="layui-form-label">日志时间 : </label>

@@ -3,15 +3,29 @@ layui.use([ 'layer', 'table', 'laydate', 'layedit'], function(){
 });
 
 var CodeLog = function(layui){
-    this.table = layui.table;
-    this.layer = layui.layer;
-    this.laydate = layui.laydate;
-    this.layedit = layui.layedit;
+    {
+        this.table = layui.table;
+        this.layer = layui.layer;
+        this.laydate = layui.laydate;
+        this.layedit = layui.layedit;
+    }
+
+    {
+        this.listUrl = "/codeLog/list";
+        this.raiseUrl = "/codeLog/raise";
+        this.deleteUrl = "/codeLog/delete";
+        this.modifyUrl = "/codeLog/modify";
+    }
+
+    {
+        var sysmBodyH = $(".sysm-body").css("height"), sysmBodyW = $(".sysm-body").css("width");
+        this.tableH = sysmBodyH.substring(0, sysmBodyH.length - 2);
+        this.tableW = sysmBodyW.substring(0, sysmBodyW.length - 2);
+        this.popupH =  (this.tableH - 50) + 'px';
+        this.popupW =  (this.tableW - 200) + 'px';
+    }
 
     this.layeditIndex = null;
-
-    this.listUrl = "/codeLog/list";
-    this.raiseUrl = "/codeLog/raise";
 };
 
 $.extend(CodeLog.prototype, {
@@ -21,11 +35,11 @@ $.extend(CodeLog.prototype, {
         this.bingSearchEvent();
     },
     'initTableList' : function () {
-        var _t = this, tableH = $(".sysm-body").css("height"), tableH = tableH.substring(0, tableH.length - 2);
+        var _t = this;
         _t.table.render({
             id:'codeLogListTable',
             elem: '#codeLog_table',
-            height: tableH,
+            height: _t.tableH,
             url: _t.listUrl,
             page: true,
             cols: [[
@@ -69,23 +83,65 @@ $.extend(CodeLog.prototype, {
         this.codeLogSearch();
     },
     'codeLogDetail' : function (obj) {
-        layMsg.modifySuccessMsg();
-        //var data = obj.data; //获得当前行数据
+        var _t = this, data = obj.data;
+
+        _t.layer.open({
+            type: 1,
+            title : '查看日志',
+            maxmin: true,
+            area: [ _t.popupW, _t.popupH],
+            content: $("#codeLogBody"),
+            btn: [common.buttonNo],
+            btn1: function(index, layero){  _t.layer.close(index); },
+        });
+
+        $("#codeLog_content").val(data.content);
+        _t.initBuild();
+        $("#codeLog_date").val(data.date);
     },
     'codeLogEdit' : function (obj) {
-        layMsg.deleteSuccessMsg();
+        var _t = this, data = obj.data;
+
+        _t.layer.open({
+            type: 1,
+            title : '修改日志',
+            maxmin: true,
+            area: [ _t.popupW, _t.popupH ],
+            content: $("#codeLogBody"),
+            btn: [common.buttonYes, common.buttonNo],
+            yes: function(index, layero){  _t.codeLogModifyCall(index, layero, obj); },
+            btn2: function(index, layero){ _t.layer.close(index); }
+        });
+
+        $("#codeLog_content").val(data.content);
+        _t.initBuild();
+        $("#codeLog_date").val(data.date);
+    },
+    'codeLogModifyCall' : function (index, layero, obj) {
+        var _t = this;
+        if( !_t.checkCodeLogForm() ) return;
+
+        var param = {
+            'codeLog.id' : obj.data.id,
+            'codeLog.date': $("#codeLog_date").val(),
+            'codeLog.content' : _t.layedit.getContent(_t.layeditIndex)
+        };
+        ajax.get(_t.modifyUrl, param, function (res) {
+            layMsg.modifyMsg(res.result);
+            _t.layer.close(index);
+            _t.codeLogReload();
+        });
     },
     'codeLogRaise': function () {
-        var _t = this,
-            tableH = $(".sysm-body").css("height"),  tableH = tableH.substring(0, tableH.length - 2) - 50,
-            tableW = $(".sysm-body").css("width"), tableW = tableW.substring(0, tableW.length - 2) - 200;
+        var _t = this;
+        $("#codeLog_content").val("");
 
         _t.layer.open({
             type: 1,
             title : '新增日志',
             maxmin: true,
-            area: [ tableW + 'px', tableH + 'px'],
-            content: $("#codeLogRaise"),
+            area: [ _t.popupW, _t.popupH ],
+            content: $("#codeLogBody"),
             btn: [common.buttonYes, common.buttonNo],
             yes: function(index, layero){  _t.codeLogRaiseCall(index, layero); },
             btn2: function(index, layero){ _t.layer.close(index); }
@@ -94,20 +150,46 @@ $.extend(CodeLog.prototype, {
         _t.initBuild();
     },
     'codeLogRaiseCall': function (index, layero) {
-        var _t = this,
-            param = {
+        var _t = this;
+        if( !_t.checkCodeLogForm() ) return;
+
+        var param = {
             'codeLog.date': $("#codeLog_date").val(),
             'codeLog.content' : _t.layedit.getContent(_t.layeditIndex)
         };
         ajax.get(_t.raiseUrl, param, function (res) {
+            layMsg.raiseMsg(res.result);
             _t.layer.close(index);
-            layMsg.raiseSuccessMsg();
             _t.codeLogReload();
         });
     },
     'codeLogDelete' : function (obj) {
-        this.layer.confirm( common.deleteConfirmTest , function(index){
-            layer.close(index);
+        var _t = this;
+
+        _t.layer.confirm( common.deleteConfirmTest , function(index){
+            var id = obj.data.id;
+            ajax.get(_t.deleteUrl, {'codeLog.id':id}, function (res) {
+                layMsg.deleteMsg(res.result);
+                _t.layer.close(index);
+                _t.codeLogReload();
+            });
         });
+    },
+    'checkCodeLogForm' : function () {
+        var _t = this;
+
+        var date = $("#codeLog_date").val();
+        if( common.isBlank(date) ) {
+            layMsg.msgError("请选择时间");
+            return false;
+        }
+
+        var content =  _t.layedit.getContent(_t.layeditIndex);
+        if( common.isBlank(content) ){
+            layMsg.msgError("请填写内容");
+            return false;
+        }
+
+        return true;
     }
 });
