@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <#include 'common/meta.html'/>
+
+    <link href="${cssUrl}/login.css" rel="stylesheet">
+    <script src="${jsUrl}/login.js"></script>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<div class="login">
+    <form class="layui-form" action="${webUrl}/loginDo">
+        <div class="layui-form-item">
+            <div class="message">欢迎登陆</div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-black">
+                <input type="text" name="userName" lay-verify="userName" placeholder="请输入帐号" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item" >
+            <div class="layui-input-black">
+                <input type="password" name="passWord" lay-verify="passWord" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <button class="layui-btn" lay-submit="" lay-filter="login" style="width:100%; background-color: #393d47">登录</button>
+    </form>
+</div>
+
+<#include 'include/particles.html'/>
+</body>
+</html>

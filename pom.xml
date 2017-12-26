@@ -21,6 +21,7 @@
     <druid.version>1.0.29</druid.version>
     <jfinal.cos.version>2017.5</jfinal.cos.version>
     <freemarker.version>2.3.23</freemarker.version>
+    <fastjson.version>1.2.41</fastjson.version>
   </properties>
 
   <dependencies>
@@ -66,6 +67,12 @@
       <artifactId>freemarker</artifactId>
       <version>${freemarker.version}</version>
     </dependency>
+    <dependency>
+      <groupId>com.alibaba</groupId>
+      <artifactId>fastjson</artifactId>
+      <version>${fastjson.version}</version>
+    </dependency>
+
   </dependencies>
 
   <!-- 使用阿里 maven 库 -->

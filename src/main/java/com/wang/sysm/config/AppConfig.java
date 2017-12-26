@@ -1,6 +1,7 @@
 package com.wang.sysm.config;
 
 import com.jfinal.config.*;
+import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -9,10 +10,9 @@ import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
 import com.wang.sysm.controller.IndexController;
-import com.wang.sysm.controller.MainController;
 import com.wang.sysm.controller.SysMCodeLogController;
 import com.wang.sysm.controller.TestController;
-import com.wang.sysm.interceptor.TestInterceptor;
+import com.wang.sysm.interceptor.LoginInterceptor;
 import com.wang.sysm.model._MappingKit;
 import freemarker.template.Configuration;
 import freemarker.template.TemplateModelException;
@@ -34,6 +34,8 @@ public class AppConfig extends JFinalConfig {
         constants.setDevMode(PropKit.getBoolean("devMode", false));
         constants.setViewType(ViewType.FREE_MARKER);
         this.setFMSharedVariable();
+
+        constants.setJsonFactory(new MixedJsonFactory());
     }
 
     /**
@@ -46,7 +48,6 @@ public class AppConfig extends JFinalConfig {
 
         routes.add("/", IndexController.class);
         routes.add("/test", TestController.class, "/test");
-        routes.add("/main", MainController.class, "/main");
         routes.add("/codeLog", SysMCodeLogController.class, "/codeLog");
     }
 
@@ -81,7 +82,8 @@ public class AppConfig extends JFinalConfig {
      */
     @Override
     public void configInterceptor(Interceptors interceptors) {
-        interceptors.addGlobalActionInterceptor(new TestInterceptor());
+        //interceptors.addGlobalActionInterceptor(new TestInterceptor());
+        interceptors.addGlobalActionInterceptor(new LoginInterceptor());
     }
 
     /**

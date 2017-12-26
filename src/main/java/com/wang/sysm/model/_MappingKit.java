@@ -18,8 +18,11 @@ public class _MappingKit {
 	public static void mapping(ActiveRecordPlugin arp) {
 		arp.addMapping("customer", "id", Customer.class);
 		arp.addMapping("sysm_code_log", "id", CodeLog.class);
+		arp.addMapping("sysm_user_info", "id", UserInfo.class);
 		arp.addMapping("test", "id", Test.class);
 		arp.addMapping("test2", "id", Test2.class);
+
+
 	}
 }
 
