@@ -4,6 +4,7 @@ import com.jfinal.aop.Clear;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.HttpKit;
 import com.jfinal.kit.JsonKit;
+import com.jfinal.kit.LogKit;
 import com.jfinal.render.FreeMarkerRender;
 import com.wang.sysm.model.UserInfo;
 import com.wang.sysm.utils.http.HttpControllerResult;
@@ -32,6 +33,7 @@ public class IndexController extends Controller {
     public void loginDo(){
         String readData = HttpKit.readData(getRequest());
         UserInfo userInfo = JsonKit.parse(readData, UserInfo.class);
+        LogKit.info("用户" + userInfo.getUserName() + "登陆");
 
         getSession().setAttribute("userInfo", userInfo);
 

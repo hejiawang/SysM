@@ -2,8 +2,12 @@ package com.wang.sysm.config;
 
 import com.jfinal.config.*;
 import com.jfinal.json.MixedJsonFactory;
+import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
+import com.jfinal.log.Log;
+import com.jfinal.log.Log4jLogFactory;
+import com.jfinal.log.LogManager;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
 import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.FreeMarkerRender;
@@ -30,6 +34,7 @@ public class AppConfig extends JFinalConfig {
     @Override
     public void configConstant(Constants constants) {
         PropKit.use("common_config.properties");
+        LogManager.me().setDefaultLogFactory(new Log4jLogFactory());
 
         constants.setDevMode(PropKit.getBoolean("devMode", false));
         constants.setViewType(ViewType.FREE_MARKER);
@@ -72,6 +77,7 @@ public class AppConfig extends JFinalConfig {
         ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
         arp.setBaseSqlTemplatePath(PathKit.getRootClassPath());
         arp.addSqlTemplate("test.sql");
+        arp.setShowSql(PropKit.getBoolean("devMode", false));
         _MappingKit.mapping(arp);
         plugins.add(arp);
     }
@@ -104,7 +110,7 @@ public class AppConfig extends JFinalConfig {
             configuration.setSharedVariable("cssUrl", PropKit.get("webUrl") + PropKit.get("cssUrl"));
             configuration.setSharedVariable("imgUrl", PropKit.get("webUrl") + PropKit.get("imgUrl"));
         } catch (TemplateModelException e) {
-            e.printStackTrace();
+            LogKit.error("FreeMarker SharedVariable Error", e);
         }
     }
 }
