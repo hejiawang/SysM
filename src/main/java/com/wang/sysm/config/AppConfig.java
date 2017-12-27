@@ -5,7 +5,6 @@ import com.jfinal.json.MixedJsonFactory;
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
-import com.jfinal.log.Log;
 import com.jfinal.log.Log4jLogFactory;
 import com.jfinal.log.LogManager;
 import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
@@ -13,6 +12,7 @@ import com.jfinal.plugin.druid.DruidPlugin;
 import com.jfinal.render.FreeMarkerRender;
 import com.jfinal.render.ViewType;
 import com.jfinal.template.Engine;
+import com.wang.sysm.config.plugins.service.ServicePlugin;
 import com.wang.sysm.controller.IndexController;
 import com.wang.sysm.controller.SysMCodeLogController;
 import com.wang.sysm.controller.TestController;
@@ -80,6 +80,8 @@ public class AppConfig extends JFinalConfig {
         arp.setShowSql(PropKit.getBoolean("devMode", false));
         _MappingKit.mapping(arp);
         plugins.add(arp);
+
+        plugins.add(new ServicePlugin());
     }
 
     /**

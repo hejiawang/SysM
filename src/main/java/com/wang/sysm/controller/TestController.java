@@ -4,6 +4,7 @@ import com.jfinal.aop.Clear;
 import com.jfinal.core.ActionKey;
 import com.jfinal.core.Controller;
 import com.jfinal.kit.PropKit;
+import com.wang.sysm.config.plugins.service.ServiceProvider;
 import com.wang.sysm.model.Test;
 import com.wang.sysm.service.ITestService;
 import com.wang.sysm.service.impl.TestServiceImpl;
@@ -17,7 +18,7 @@ import java.util.UUID;
  */
 public class TestController extends Controller {
 
-    private static final ITestService testService = new TestServiceImpl();
+    private static final ITestService testService = ServiceProvider.getService(ITestService.class);
 
     @Clear
     public void index(){

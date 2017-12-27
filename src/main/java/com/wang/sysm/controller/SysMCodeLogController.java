@@ -1,6 +1,7 @@
 package com.wang.sysm.controller;
 
 import com.jfinal.core.Controller;
+import com.wang.sysm.config.plugins.service.ServiceProvider;
 import com.wang.sysm.model.CodeLog;
 import com.wang.sysm.service.ISysMCodeLogService;
 import com.wang.sysm.service.impl.SysMCodeLogServiceImpl;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 public class SysMCodeLogController extends Controller {
 
-    public static final ISysMCodeLogService service = new SysMCodeLogServiceImpl();
+    public static final ISysMCodeLogService service = ServiceProvider.getService(ISysMCodeLogService.class);
 
     public void index(){
         renderFreeMarker("codeLog.html");

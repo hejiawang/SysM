@@ -21,4 +21,5 @@ public interface ITestService {
 
     List<Test> findAll();
 
+    String test();
 }

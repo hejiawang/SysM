@@ -43,4 +43,9 @@ public class TestServiceImpl implements ITestService {
     public List<Test> findAll() {
         return testDao.find("select * from test");
     }
+
+    @Override
+    public String test() {
+        return "asfasdasdfasdf";
+    }
 }
