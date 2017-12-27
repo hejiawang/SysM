@@ -4,6 +4,7 @@ import com.jfinal.aop.Interceptor;
 import com.jfinal.aop.Invocation;
 import com.jfinal.core.Controller;
 import com.wang.sysm.model.UserInfo;
+import com.wang.sysm.kit.ObjectKit;
 
 /**
  * 登陆拦截器
@@ -16,7 +17,7 @@ public class LoginInterceptor implements Interceptor {
     public void intercept(Invocation invocation) {
         Controller controller = invocation.getController();
         UserInfo userInfo = controller.getSessionAttr("userInfo");
-        if( userInfo == null ){
+        if(ObjectKit.isBlank(userInfo) ){
             controller.redirect("/login");
         } else {
             invocation.invoke();

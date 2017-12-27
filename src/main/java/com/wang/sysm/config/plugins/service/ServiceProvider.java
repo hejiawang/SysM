@@ -2,7 +2,7 @@ package com.wang.sysm.config.plugins.service;
 
 import com.jfinal.kit.LogKit;
 import com.jfinal.kit.PropKit;
-import com.wang.sysm.utils.ClassUtil;
+import com.wang.sysm.kit.ClassKit;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +18,7 @@ public class ServiceProvider {
 
     public static boolean init(){
         try {
-            Set<Class<?>> classSet = ClassUtil.getClassSet(PropKit.get("servicePackage"));
+            Set<Class<?>> classSet = ClassKit.getClassSet(PropKit.get("servicePackage"));
             for( Class tclass : classSet ){
                 if( tclass.isInterface() ){
                     String[] str = tclass.getName().split("\\.");

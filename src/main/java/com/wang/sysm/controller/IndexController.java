@@ -5,10 +5,8 @@ import com.jfinal.core.Controller;
 import com.jfinal.kit.HttpKit;
 import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.LogKit;
-import com.jfinal.render.FreeMarkerRender;
 import com.wang.sysm.model.UserInfo;
-import com.wang.sysm.utils.http.HttpControllerResult;
-import freemarker.template.TemplateModelException;
+import com.wang.sysm.kit.http.HttpControllerResult;
 
 /**
  * @auther HeJiawang
@@ -22,6 +20,10 @@ public class IndexController extends Controller {
 
     public void main(){
         renderFreeMarker("main/main.html");
+    }
+
+    public void logout(){
+        removeSessionAttr("userInfo").redirect("/login");
     }
 
     @Clear

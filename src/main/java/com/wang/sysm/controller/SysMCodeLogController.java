@@ -4,9 +4,8 @@ import com.jfinal.core.Controller;
 import com.wang.sysm.config.plugins.service.ServiceProvider;
 import com.wang.sysm.model.CodeLog;
 import com.wang.sysm.service.ISysMCodeLogService;
-import com.wang.sysm.service.impl.SysMCodeLogServiceImpl;
-import com.wang.sysm.utils.http.HttpControllerResult;
-import com.wang.sysm.utils.http.LayUIPageResult;
+import com.wang.sysm.kit.http.HttpControllerResult;
+import com.wang.sysm.kit.http.LayUIPageResult;
 
 import java.util.List;
 

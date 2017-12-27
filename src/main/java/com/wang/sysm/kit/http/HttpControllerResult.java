@@ -1,4 +1,4 @@
-package com.wang.sysm.utils.http;
+package com.wang.sysm.kit.http;
 
 /**
  * controler控制层统一返回结果对象类

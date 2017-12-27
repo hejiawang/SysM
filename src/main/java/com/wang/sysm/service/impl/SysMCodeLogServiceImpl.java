@@ -1,10 +1,9 @@
 package com.wang.sysm.service.impl;
 
-import com.jfinal.kit.StrKit;
 import com.jfinal.plugin.activerecord.Page;
 import com.wang.sysm.model.CodeLog;
 import com.wang.sysm.service.ISysMCodeLogService;
-import com.wang.sysm.utils.UUIDUtil;
+import com.wang.sysm.kit.UUIDKit;
 
 import java.util.List;
 
@@ -23,7 +22,7 @@ public class SysMCodeLogServiceImpl implements ISysMCodeLogService {
 
     @Override
     public Boolean save(CodeLog codeLog) {
-        codeLog.setId(UUIDUtil.render());
+        codeLog.setId(UUIDKit.render());
         return codeLog.save();
     }
 

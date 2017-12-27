@@ -1,4 +1,4 @@
-package com.wang.sysm.utils;
+package com.wang.sysm.kit;
 
 import com.jfinal.kit.StrKit;
 
@@ -16,7 +16,7 @@ import java.util.jar.JarFile;
  * @auther HeJiawang
  * @date 2017/12/27
  */
-public class ClassUtil {
+public class ClassKit {
 
     /**
      * 获取类加载器

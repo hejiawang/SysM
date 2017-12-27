@@ -1,4 +1,4 @@
-package com.wang.sysm.utils.http;
+package com.wang.sysm.kit.http;
 
 import com.jfinal.plugin.activerecord.Page;
 
