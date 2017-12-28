@@ -75,8 +75,8 @@ public class AppConfig extends JFinalConfig {
         plugins.add(druidPlugin);
 
         ActiveRecordPlugin arp = new ActiveRecordPlugin(druidPlugin);
-        arp.setBaseSqlTemplatePath(PathKit.getRootClassPath());
-        arp.addSqlTemplate("test.sql");
+        arp.setBaseSqlTemplatePath(PathKit.getRootClassPath() + "/sql");
+        arp.addSqlTemplate("all.sql");
         arp.setShowSql(PropKit.getBoolean("devMode", false));
         _MappingKit.mapping(arp);
         plugins.add(arp);

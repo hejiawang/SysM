@@ -1,7 +1,12 @@
 package com.wang.sysm.model;
 
+import com.alibaba.druid.sql.parser.SQLParser;
+import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
+import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
+import com.jfinal.plugin.activerecord.Record;
+import com.jfinal.plugin.activerecord.SqlPara;
 import com.wang.sysm.model.base.BaseCodeLog;
 
 import java.util.List;
@@ -13,17 +18,13 @@ import java.util.List;
 public class CodeLog extends BaseCodeLog<CodeLog> {
 	public static final CodeLog dao = new CodeLog().dao();
 
-	public static Page<CodeLog> paginate( int pageNumber, int pageSize, String content ){
-		String sqlFrom = "from sysm_code_log ";
-		if(StrKit.notBlank(content)){
-			sqlFrom += "where content like '%" + content + "%' ";
-		}
-		sqlFrom += "ORDER BY date DESC";
-
-		return dao.paginate(pageNumber, pageSize, "select *", sqlFrom);
+	public Page<CodeLog> paginate( int pageNumber, int pageSize, String content ){
+		Kv contentKv = StrKit.notBlank(content) ? Kv.by("content like ", content) : Kv.by("1 like ", "1");
+		SqlPara sqlPara = getSqlPara("codeLog.paginate", Kv.by("content", contentKv));
+		return dao.paginate(pageNumber, pageSize, "select *",  sqlPara.getSql(), sqlPara.getPara());
 	}
 
     public List<CodeLog> findAll() {
-    	return dao.find("select * from sysm_code_log ORDER BY date DESC");
+    	return dao.find(getSql("codeLog.findAll"));
 	}
 }
