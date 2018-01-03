@@ -32,7 +32,7 @@ $.extend(Login.prototype, {
                 if( res.result ) {
                     location.href = _t.indexUrl;
                 } else {
-                    layMsg.msgError("登陆失败，请联系管理员");
+                    layMsg.msgError(res.message);
                 }
             });
 

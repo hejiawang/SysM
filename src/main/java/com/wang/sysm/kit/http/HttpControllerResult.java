@@ -21,33 +21,37 @@ public class HttpControllerResult<T> {
         this.result = t;
     }
 
-    public void error (int code, String message) {
+    public HttpControllerResult<T> error (int code, String message) {
         this.code = code;
         this.message = message;
+        return this;
     }
 
     public T getResult() {
         return result;
     }
 
-    public void setResult(T result) {
+    public HttpControllerResult<T> setResult(T result) {
         this.result = result;
+        return this;
     }
 
     public int getCode() {
         return code;
     }
 
-    public void setCode(int code) {
+    public HttpControllerResult<T> setCode(int code) {
         this.code = code;
+        return this;
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
+    public HttpControllerResult<T> setMessage(String message) {
         this.message = message;
+        return this;
     }
 
 }

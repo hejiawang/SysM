@@ -24,6 +24,7 @@
     <fastjson.version>1.2.41</fastjson.version>
     <shiro.version>1.2.2</shiro.version>
     <commons.logging.version>1.2</commons.logging.version>
+    <ehcache.version>2.6.6</ehcache.version>
   </properties>
 
   <dependencies>
@@ -88,6 +89,11 @@
       <groupId>commons-logging</groupId>
       <artifactId>commons-logging</artifactId>
       <version>${commons.logging.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>net.sf.ehcache</groupId>
+      <artifactId>ehcache-core</artifactId>
+      <version>${ehcache.version}</version>
     </dependency>
   </dependencies>
 
