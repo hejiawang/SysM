@@ -7,6 +7,10 @@ import com.jfinal.kit.JsonKit;
 import com.jfinal.kit.LogKit;
 import com.wang.sysm.model.UserInfo;
 import com.wang.sysm.kit.http.HttpControllerResult;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 
 /**
  * @auther HeJiawang
@@ -23,7 +27,10 @@ public class IndexController extends Controller {
     }
 
     public void logout(){
-        removeSessionAttr("userInfo").redirect("/login");
+        removeSessionAttr("userInfo");
+
+        SecurityUtils.getSubject().logout();
+        redirect("/login");
     }
 
     @Clear
@@ -35,10 +42,16 @@ public class IndexController extends Controller {
     public void loginDo(){
         String readData = HttpKit.readData(getRequest());
         UserInfo userInfo = JsonKit.parse(readData, UserInfo.class);
-        LogKit.info("用户" + userInfo.getUserName() + "登陆");
 
-        getSession().setAttribute("userInfo", userInfo);
+        Subject subject = SecurityUtils.getSubject();
+        UsernamePasswordToken token = new UsernamePasswordToken(userInfo.getUserName(), userInfo.getPassWord());
+        try {
+            subject.login(token);
 
-        renderJson(new HttpControllerResult<Boolean>(true));
+            getSession().setAttribute("userInfo", userInfo);
+            renderJson(new HttpControllerResult<Boolean>(true));
+        } catch (AuthenticationException e) {
+            renderJson(new HttpControllerResult<Boolean>(false));
+        }
     }
 }
