@@ -36,6 +36,15 @@ public abstract class BaseUserInfo<M extends BaseUserInfo<M>> extends Model<M> i
 		return getStr("passWord");
 	}
 
+	public M setSalt(java.lang.String salt) {
+		set("salt", salt);
+		return (M)this;
+	}
+	
+	public java.lang.String getSalt() {
+		return getStr("salt");
+	}
+
 	public M setRealName(java.lang.String realName) {
 		set("realName", realName);
 		return (M)this;

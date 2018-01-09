@@ -36,6 +36,7 @@ CREATE TABLE `sysm_user_info` (
   `id` varchar(36) NOT NULL COMMENT 'ID主键',
   `userName` varchar(255) NOT NULL COMMENT '登录名',
 	`passWord` varchar(255) NOT NULL COMMENT '密码',
+	`salt` varchar(255) NOT NULL COMMENT '密码盐',
 	`realName` varchar(255) NOT NULL COMMENT '真是姓名',
 	`email` varchar(100) NOT NULL COMMENT '邮箱',
 	`telephone` varchar(20) NOT NULL COMMENT '联系方式',

@@ -21,8 +21,6 @@ public class _MappingKit {
 		arp.addMapping("sysm_user_info", "id", UserInfo.class);
 		arp.addMapping("test", "id", Test.class);
 		arp.addMapping("test2", "id", Test2.class);
-
-
 	}
 }
 
