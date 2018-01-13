@@ -3,6 +3,9 @@
     display: none;
     height: 100%
 }
+.layui-btn-display {
+    display: none;
+}
 .hvr-icon-pulse {
     display: inline-block;
     vertical-align: middle;

@@ -12,13 +12,11 @@ import org.apache.shiro.util.ByteSource;
  */
 public class PasswordHelper {
 
-    private RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
+    private static final RandomNumberGenerator randomNumberGenerator = new SecureRandomNumberGenerator();
+    private static final String algorithmName = "md5";
+    private static final int hashIterations = 2;
 
-    private String algorithmName = "md5";
-    private final int hashIterations = 2;
-
-    public void encryptPassword(UserInfo user) {
-
+    public static void encryptPassword(UserInfo user) {
         user.setSalt(randomNumberGenerator.nextBytes().toHex());
         String newPassword = new SimpleHash( algorithmName, user.getPassWord(), ByteSource.Util.bytes(user.getSalt()),
                 hashIterations).toHex();

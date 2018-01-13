@@ -15,6 +15,7 @@ import com.jfinal.template.Engine;
 import com.wang.sysm.config.plugins.service.ServicePlugin;
 import com.wang.sysm.controller.IndexController;
 import com.wang.sysm.controller.SysMCodeLogController;
+import com.wang.sysm.controller.SysMUserInfoController;
 import com.wang.sysm.controller.TestController;
 import com.wang.sysm.interceptor.LoginInterceptor;
 import com.wang.sysm.model._MappingKit;
@@ -54,6 +55,7 @@ public class AppConfig extends JFinalConfig {
         routes.add("/", IndexController.class);
         routes.add("/test", TestController.class, "/test");
         routes.add("/codeLog", SysMCodeLogController.class, "/codeLog");
+        routes.add("/userInfo", SysMUserInfoController.class, "/userInfo");
     }
 
     /**

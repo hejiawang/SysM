@@ -16,7 +16,7 @@ import java.util.List;
  */
 public class SysMCodeLogController extends Controller {
 
-    public static final ISysMCodeLogService service = ServiceProvider.getService(ISysMCodeLogService.class);
+    private static final ISysMCodeLogService service = ServiceProvider.getService(ISysMCodeLogService.class);
 
     public void index(){
         renderFreeMarker("codeLog.html");

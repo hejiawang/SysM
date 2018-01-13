@@ -1,11 +1,8 @@
 package com.wang.sysm.model;
 
-import com.alibaba.druid.sql.parser.SQLParser;
 import com.jfinal.kit.Kv;
 import com.jfinal.kit.StrKit;
-import com.jfinal.plugin.activerecord.Db;
 import com.jfinal.plugin.activerecord.Page;
-import com.jfinal.plugin.activerecord.Record;
 import com.jfinal.plugin.activerecord.SqlPara;
 import com.wang.sysm.model.base.BaseCodeLog;
 

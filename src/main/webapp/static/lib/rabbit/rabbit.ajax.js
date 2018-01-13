@@ -2,21 +2,21 @@ function Ajax() {
 	this.ajax = function(url, type, datatype, data, async, callback) {
         if (type != 'GET') data = JSON.stringify(data);
 		$.ajax({url: url, type: type, dataType: datatype, async: async, contentType: "application/json", data: data,
-			success: function (res) {
-				if (datatype == 'json') {
+            success: function (res) {
+                if (datatype == 'json') {
                     if (res.code == 0) {
                         callback && callback(res);
                     } else {
                         // alert("错误提示:" + res.message);
                     }
-				} else {
+                } else {
                     callback && callback(res);
-				}
-			},
-			error: function(xhr, errorType, error) {
-				// alert("请求超时，请重试！");
-			}
-		});
+                }
+            },
+            error: function(xhr, errorType, error) {
+                // alert("请求超时，请重试！");
+            }
+        });
 	}
 }
 
