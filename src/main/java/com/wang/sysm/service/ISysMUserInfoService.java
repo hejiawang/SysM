@@ -24,4 +24,18 @@ public interface ISysMUserInfoService {
      * @return 是否保存成功
      */
     Boolean save(UserInfo userInfo);
+
+    /**
+     * 删除用户信息
+     * @param userInfo 用户信息
+     * @return 是否删除成功
+     */
+    Boolean delete(UserInfo userInfo);
+
+    /**
+     * 修改用户信息
+     * @param userInfo 用户信息
+     * @return 是否修改成功
+     */
+    Boolean modify(UserInfo userInfo);
 }

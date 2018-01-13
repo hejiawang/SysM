@@ -28,4 +28,16 @@ public class SysMUserInfoServiceImpl implements ISysMUserInfoService {
         userInfo.setCreateTime( new Date()).setUpdateTime(new Date());
         return userInfo.save();
     }
+
+    @Override
+    public Boolean delete(UserInfo userInfo) {
+        return userInfo.delete();
+    }
+
+    @Override
+    public Boolean modify(UserInfo userInfo) {
+        PasswordHelper.encryptPassword(userInfo);
+        userInfo.setUpdateTime(new Date());
+        return userInfo.update();
+    }
 }

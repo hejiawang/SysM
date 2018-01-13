@@ -35,4 +35,15 @@ public class SysMUserInfoController extends Controller {
 
         renderJson(new HttpControllerResult<Boolean>(service.save(userInfo)));
     }
+
+    public void delete(){
+        UserInfo userInfo = getBean(UserInfo.class);
+        renderJson(new HttpControllerResult<Boolean>(service.delete(userInfo)));
+    }
+
+    public void modify(){
+        String readData = HttpKit.readData(getRequest());
+        UserInfo userInfo = JsonKit.parse(readData, UserInfo.class);
+        renderJson(new HttpControllerResult<Boolean>(service.modify(userInfo)));
+    }
 }

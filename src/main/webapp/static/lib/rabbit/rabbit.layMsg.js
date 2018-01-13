@@ -13,6 +13,19 @@ $.extend(LayMsg.prototype, {
     'msgError' : function (info) {
         this.layer.msg(info, {icon: 5});
     },
+    'msg' : function (isSuccess) {
+        if( isSuccess ){
+            this.successMsg();
+        } else {
+            this.failMsg();
+        }
+    },
+    'successMsg' : function () {
+        this.msgInfo(common.successText);
+    },
+    'failMsg' : function () {
+        this.msgError(common.failText);
+    },
     'raiseMsg' : function ( isSuccess ) {
         if( isSuccess ){
             this.raiseSuccessMsg();

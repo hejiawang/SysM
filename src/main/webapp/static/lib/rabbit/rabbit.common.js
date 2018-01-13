@@ -3,11 +3,13 @@ var Common = function () {
     this.modifySuccessText = "修改成功！";
     this.deleteSuccessText = "删除成功！";
     this.viewSuccessText = "查看成功！";
+    this.successText = "处理成功！";
 
     this.raiseFailText = "新增失败！";
     this.modifyFailText = "修改失败！";
     this.deleteFailText = "删除失败！";
     this.viewFailText = "查看失败！";
+    this.failText = "处理失败！";
 
     this.RaiseConfirmTest = "确认新增？";
     this.modifyConfirmTest = "确认修改？";
